@@ -1,0 +1,45 @@
+---
+# tasks file for rhel system
+
+- name: Ensure old versions of Docker are not installed.
+  package:
+    name: '{{ item }}'
+    state: absent
+  with_items:
+    - docker
+    - docker-common
+    - docker-engine
+
+- name: Install yum utils
+  yum:
+    name: yum-utils
+    state: latest
+
+- name: Add Docker GPG key.
+  rpm_key:
+    key: https://download.docker.com/linux/centos/gpg
+    state: present
+
+- name: Add Docker repository.
+  get_url:
+    url: "{{ docker_yum_repo_url }}"
+    dest: '/etc/yum.repos.d/docker-{{ docker_edition }}.repo'
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Enable Docker {{ docker_edition }} {{docker_yum_release_channel}} repo
+  ini_file:
+    dest: /etc/yum.repos.d/docker-{{ docker_edition }}.repo
+    section: "docker-{{ docker_edition }}-{{docker_yum_release_channel}}"
+    option: enabled
+    value: 1
+  become: yes
+
+
+
+- name: Install docker python api for ansible
+  package:
+    name: python-docker-py
+    state: latest
+  become: yes
