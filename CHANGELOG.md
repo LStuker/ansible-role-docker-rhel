@@ -6,8 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- Install docker compose 
+
+## [1.0.0]
+### Added
 - Install docker-py on CentOS only 
 - Install docker-ce yum repository
 - Install docker-ce
 - Enable and start docker service
+
 
