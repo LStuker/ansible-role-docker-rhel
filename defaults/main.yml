@@ -8,3 +8,8 @@ docker_package_state: present
 # Used only for RedHat/CentOS.
 docker_yum_repo_url: https://download.docker.com/linux/centos/docker-{{ docker_edition }}.repo
 docker_yum_release_channel: stable
+
+# Docker Compose
+docker_compose_install: false
+docker_compose_version: "1.23.0"
+docker_compose_download_url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-{{ ansible_facts['system'] }}-{{ ansible_facts['architecture'] }}"

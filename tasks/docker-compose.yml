@@ -1,0 +1,18 @@
+---
+# tasks install docker compose
+
+- name: Remove Docker Compose
+  file:
+    path: "/usr/local/bin/docker-compose"
+    state: "absent"
+  when: not docker_compose_install
+
+- name: Install Docker Compose
+  get_url:
+    url: "{{ docker_compose_download_url }}"
+    dest: "/usr/local/bin/docker-compose"
+    force: true
+    owner: "root"
+    group: "root"
+    mode: "0755"
+  when: docker_compose_install

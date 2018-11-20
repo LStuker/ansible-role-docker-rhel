@@ -16,3 +16,5 @@
     state: started
     enabled: yes
   become: yes
+
+- include: docker-compose.yml
