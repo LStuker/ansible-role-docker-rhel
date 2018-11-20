@@ -36,10 +36,9 @@
     value: 1
   become: yes
 
-
-
 - name: Install docker python api for ansible
   package:
-    name: python-docker-py
-    state: latest
+     name: python-docker-py
+     state: latest
   become: yes
+  when: ansible_distribution == 'CentOS'
